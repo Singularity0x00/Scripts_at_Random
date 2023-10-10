@@ -46,6 +46,5 @@ if [[ ! -f $HOME/.local/share/dndiaries/dnd_data.txt ]] ; then
 fi
 epname=$(cat $HOME/.local/share/dndiaries/dnd_data.txt | grep -P "(?=<title>*)" | sed -e 's/<[^>]*>//g' -e 's/^[[:blank:]]*//' -e '/^Darknet/d' | fzf) 
 echo -e "playing Episode: \033[1m $epname \033[0m"
-grep -A1 "$epname" $HOME/.local/share/dndiaries/dnd_data.txt | grep -E '<description>'| sed -e 's/<[^>]*>//g'
-mpv --really-quiet `grep -A2 "$epname" $HOME/.local/share/dndiaries/dnd_data.txt | grep -Po "(?<=enclosure url=\")[^\?][^\"]*"`
-notify-send "Playing Episode $epname"
+grep -A1 "$epname" $HOME/.local/share/dndiaries/dnd_data.txt | grep -E '<description>'| sed -e 's/<[^>]*>//g' && notify-send "Playing Episode $epname"
+mpv --no-video --really-quiet `grep -A2 "$epname" $HOME/.local/share/dndiaries/dnd_data.txt | grep -Po "(?<=enclosure url=\")[^\?][^\"]*"`
