@@ -1,0 +1,86 @@
+#! /bin/bash
+
+if [ -z $1 ]; then
+	printf "enter name: "
+	read work
+fi
+
+usage() {
+	echo "-c Create CTF in existing CTFS."
+	echo "-t Create Target"
+	echo "-n Create new CTF"
+	echo "-q Create web3 contest"
+	echo "-e Create web3 target"
+	echo "-h open this help"
+}
+
+content() { 
+	echo -e 'Crits\n--\n- #reportID "hackername"\n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Reports.md
+	echo -e '#STUFF\n#Description: Breakdown of stuff found in requests - params, tokens, endpoints etc\n\n | Stuff | Example| Description | Notes | Functionality' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Stuff.md
+	echo -e '#Endpoints\n#Description: Collection of endpoits found while hunting\n\n| Endpoints | Desc | host |' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Endpoints.md
+	echo -e '#Notes\n#Description: Random Thoughts\n##Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n##Company_Profile\n\n##First_contact\n###Testing_creds\n```ACCn :{creds}```\n##APP\n\n##Misc\n\n##Attack_Ideas\n*' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Notes.md
+}
+
+contentw3target() { 
+	echo -e 'Crits\n--\n- #reportID "hackername"\n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> /home/deadeye/hack/Research/web3/target/$work/Notes/Reports.md
+	echo -e '#Notes\n#Description: Random Thoughts\n##Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n##Company_Profile\n\n##First_contact\n###Testing_creds\n```ACCn :{creds}```\n##APP\n\n##Misc\n\n##Attack_Ideas\n*' >> /home/deadeye/hack/Research/web3/target/$work/Notes/Notes.md
+}
+
+contentw3contest() { 
+	echo -e 'Crits\n--\n- #reportID "hackername"\n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> /home/deadeye/hack/Research/web3/audit_contests/$work/Notes/Reports.md
+	echo -e '#Notes\n#Description: Random Thoughts\n##Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n##Company_Profile\n\n##First_contact\n###Testing_creds\n```ACCn :{creds}```\n##APP\n\n##Misc\n\n##Attack_Ideas\n*' >> /home/deadeye/hack/Research/web3/audit_contests/$work/Notes/Notes.md
+}
+
+ctf_tmp() {
+	ndir=$(ls /home/deadeye/hack/CTFs | fzf)
+	mkdir -p /home/deadeye/hack/CTFs/$ndir/$work;
+	cd /home/deadeye/hack/CTFs/$ndir/$work;
+	touch {Notes,Flags}.md
+	
+}
+
+new_ctf_tmp() {
+	mkdir -p /home/deadeye/hack/CTFs/$work;
+	cd /home/deadeye/hack/CTFs/$work;
+	touch {Notes,Flags}.md
+}
+
+target_web_tmp() {
+	mkdir -p /home/deadeye/hack/Research/web/Targets/$work/{Assets,Notes,Proxy_data};
+	cd /home/deadeye/hack/Research/Targets/$work/Notes;
+	touch {Notes,Stuff,Reports,Flows,Endpoints,RTFM}.md
+	content
+}
+
+contest_tmp() {
+	mkdir -p /home/deadeye/hack/Research/web3/audit_contests/$work/{Assets,Notes};
+	cd /home/deadeye/hack/Research/web3/audit_contests/$work/Notes;
+	touch {Notes,Reports,Flows}.md
+	contentw3contest
+}
+target_web3_tmp() {
+	mkdir -p /home/deadeye/hack/Research/web3/target/$work/{Assets,Notes};
+	cd /home/deadeye/hack/Research/web3/target/$work/Notes;
+	touch {Notes,Reports,Flows}.md
+	contentw3target
+}
+	
+while getopts 'c:t:n:h:q:e:' flag; do
+    case "${flag}" in 
+	c) 	work=${OPTARG} 
+		echo $work
+		ctf_tmp ;;
+	t) 	work=${OPTARG} 
+		target_tmp ;;
+	n) 	work=${OPTARG} 
+		new_ctf_tmp ;;
+	q)	work=${OPTARG} 
+		contest_tmp ;;
+	e)	work=${OPTARG} 
+		target_web3_tmp ;;
+	h)
+		usage && exit ;;
+	*|?)
+		usage && exit 1 ;;
+    esac
+done
