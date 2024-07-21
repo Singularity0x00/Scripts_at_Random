@@ -33,3 +33,11 @@ Shred with fzf.
 
 <h3>GENTEMP</h3>
 Generates directory templates for my hacking workflow.  
+
+<h3>MGC</h3> 
+Cleanly clones all repositories from a given file containing repo urls.
+
+<h3>MASS_SHRED</h3>
+Deletes all files matching regex in a directory.
+
+
