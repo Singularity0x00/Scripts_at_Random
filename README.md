@@ -29,3 +29,7 @@ Explore web directories from terminal.
 Shred with fzf.
 
 [shredder.webm](https://github.com/HrideshG88/Scripts_at_Random/assets/37382537/cca8cc5e-5d33-49db-9ff7-a570fbf2ff51)
+
+
+<h3>GENTEMP</h3>
+Generates directory templates for my hacking workflow.  
