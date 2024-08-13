@@ -1,9 +1,3 @@
-#! /bin/bash
-
-for root in $(cat "$1"); do 
-	sublist3r -b -d "$root" -t 4 -o subdomains
-done
-➜  ~ cat scripts/newq
 #!/bin/bash
 
 dir="$HOME/Pictures/wallpapers/"
