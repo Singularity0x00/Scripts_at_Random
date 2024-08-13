@@ -1,6 +1,12 @@
 #!/bin/bash
 
 dir="$HOME/Pictures/wallpapers/"
+
+if [[ ! -d $HOME/.config/newq/ ]] ; then 
+	mkdir -p $HOME/.config/newq/
+	touch $HOME/.config/newq/newq.conf
+fi
+
 conf="$HOME/.config/newq/newq.conf"
 
 . "$conf"
