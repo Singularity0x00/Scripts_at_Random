@@ -16,7 +16,7 @@ usage() {
 	echo "-h   display this help  "
 	echo "-v   display version "
 	echo "-r   set random wallpaper "
-	echo "-d   default wallpaper "
+	echo "-d   set default wallpaper "
 	echo "-c   change default wallpaper "
 	echo "-s   select wallpaper "
 
