@@ -1,27 +1,70 @@
+#! /bin/bash
+
+for root in $(cat "$1"); do 
+	sublist3r -b -d "$root" -t 4 -o subdomains
+done
+➜  ~ cat scripts/newq
 #!/bin/bash
 
 dir="$HOME/Pictures/wallpapers/"
+conf="$HOME/.config/newq/newq.conf"
+
+. "$conf"
 
 usage() {
 	echo "USAGE: "
 	echo "-h   display this help  "
 	echo "-v   display version "
 	echo "-r   set random wallpaper "
+	echo "-d   default wallpaper "
+	echo "-c   change default wallpaper "
 	echo "-s   select wallpaper "
 
 }
 
+runtime()
+{
+	pywalfox update;
+	#cd && ./alacrittypywal.sh >/dev/null 2>&1 ; 
+	cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
+	awesome-client 'awesome.restart()' >/dev/null 2>&1
+	bash $HOME/misc/ChromiumPywal/generate-theme.sh
+	
+}
+
+startup()
+{
+	pywalfox update;
+	#cd && ./alacrittypywal.sh >/dev/null 2>&1 ; 
+	cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
+	bash $HOME/misc/ChromiumPywal/generate-theme.sh
+}
+
+setDefault()
+{
+    	default="$(echo $(sxiv -r "$dir" -o))" 
+    	echo "Setting default wallpaper to $default"
+    	typeset -p default > "$conf"
+}
+
 options() {
-while getopts "rvsh:" flag
+while getopts "rvcdsh:" flag
 do
 	case "$flag" in 
 		v)
 			echo "v1.2" && exit;;
 		r)
-			wal -q -i "$dir";;
+			wal -q -i "$dir"
+			runtime ;;
+        c)
+        	setDefault ;;
+        d)
+			wal -q -i "$default" 
+           	startup ;;
 		s)
 			wpr="$(sxiv -r "$dir" -o)" 
-			wal -q -i "$wpr" ;;
+			wal -q -i "$wpr" 
+            runtime ;;
 		h)
 			usage ;;
 		?)
@@ -30,9 +73,3 @@ do
 done 
 }
 options "$@"
-pywalfox update;
-cd && ./alacrittypywal.sh >/dev/null 2>&1 ; 
-cp .cache/wal/colors.Xresources $HOME/.Xresources
-awesome-client 'awesome.restart()' >/dev/null 2>&1
-cd misc/ChromiumPywal/ && ./generate-theme.sh
-cd
