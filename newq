@@ -56,15 +56,15 @@ do
 		r)
 			wal -q -i "$dir"
 			runtime ;;
-        c)
-        	setDefault ;;
-        d)
+        	c)
+        		setDefault ;;
+      	  	d)
 			wal -q -i "$default" 
-           	startup ;;
+           		startup ;;
 		s)
 			wpr="$(sxiv -r "$dir" -o)" 
 			wal -q -i "$wpr" 
-            runtime ;;
+            		runtime ;;
 		h)
 			usage ;;
 		?)
