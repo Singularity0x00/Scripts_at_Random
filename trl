@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Translate words using http://context.reverso.net and scraping the answers
+# with 'pup' and 'curl'.
+
+# returns available languages
+languages () {
+    printf 'arabic\nchinese\nczech\ndanish\ndutch\nenglish\nfrench\ngerman\ngreek\nhebrew\nhindi\nhungarian\nitalian\njapanese\nkorean\npersian\npolish\nportuguese\nromanian\nslovak\nspanish\nswedish\nthai\nturkish\nukrainian\n'
+}
+
+if [ -z "${word:=$1}" ]
+then
+    >&2 printf '>'
+    word="$(head -n1)"
+fi
+[ "$word" ] || exit 1
+
+primary="$(languages | fzf --prompt="from:")"
+[ "$primary" ] || exit 1
+
+secondary="$(languages | fzf --prompt="to:")"
+[ "$secondary" ] || exit 1
+
+curl -s "https://context.reverso.net/translation/$primary-$secondary/$word" \
+    --compressed \
+    -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/116.0' \
+    -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' \
+    -H 'Accept-Encoding: gzip, deflate, br' |
+    pup 'a.link_highlighted em text{}' |
+    sed 's/.*/\L&/' |
+    sort | uniq | sed 's/.*/  &/'

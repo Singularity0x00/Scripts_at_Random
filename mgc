@@ -1,8 +1,8 @@
 #! /bin/bash
+
 echo -e "\033[1mMASS GIT CLONER"
 
 for i in $(cat "$1"); do
     echo -e "\033[0;32mCloning "$i"\033[0m"
     git clone "$i"
 done
-
