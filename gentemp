@@ -15,52 +15,52 @@ usage() {
 }
 
 content() { 
-	echo -e 'Crits\n--\n- #reportID "hackername"\n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Reports.md
-	echo -e '#STUFF\n#Description: Breakdown of stuff found in requests - params, tokens, endpoints etc\n\n | Stuff | Example| Description | Notes | Functionality' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Stuff.md
-	echo -e '#Endpoints\n#Description: Collection of endpoits found while hunting\n\n| Endpoints | Desc | host |' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Endpoints.md
-	echo -e '#Notes\n#Description: Random Thoughts\n## Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n## Company_Profile\n\n## First_contact\n### Testing_creds\n```ACCn :{creds}```\n## APP\n\n## Misc\n\n## Attack_Ideas\n*' >> /home/deadeye/hack/Research/web/Targets/$work/Notes/Notes.md
+	echo -e 'Crits\n--\n- #reportID "hackername"\n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> $HOME/hack/Research/web/Targets/$work/Notes/Reports.md
+	echo -e '#STUFF\n#Description: Breakdown of stuff found in requests - params, tokens, endpoints etc\n\n | Stuff | Example| Description | Notes | Functionality' >> $HOME/hack/Research/web/Targets/$work/Notes/Stuff.md
+	echo -e '#Endpoints\n#Description: Collection of endpoits found while hunting\n\n| Endpoints | Desc | host |' >> $HOME/hack/Research/web/Targets/$work/Notes/Endpoints.md
+	echo -e '#Notes\n#Description: Random Thoughts\n## Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n## Company_Profile\n\n## First_contact\n### Testing_creds\n```ACCn :{creds}```\n## APP\n\n## Misc\n\n## Attack_Ideas\n*' >> $HOME/hack/Research/web/Targets/$work/Notes/Notes.md
 }
 
 contentw3target() { 
-	echo -e 'Crits\n--\n- (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> /home/deadeye/hack/Research/web3/target/$work/Notes/Reports.md
-	echo -e '#Notes\n#Description: Random Thoughts\n## Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n## Misc\n\n## Attack_Ideas\n*' >> /home/deadeye/hack/Research/web3/target/$work/Notes/Notes.md
+	echo -e 'Crits\n--\n- (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> $HOME/hack/Research/web3/target/$work/Notes/Reports.md
+	echo -e '#Notes\n#Description: Random Thoughts\n## Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n## Misc\n\n## Attack_Ideas\n*' >> $HOME/hack/Research/web3/target/$work/Notes/Notes.md
 }
 
 contentw3contest() { 
-	echo -e 'Crits\n--\n- #reportID \n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> /home/deadeye/hack/Research/web3/audit_contests/$work/Notes/Reports.md
-	echo -e '#Notes\n#Description: Random Thoughts\n## Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n## Misc\n\n## Attack_Ideas\n*' >> /home/deadeye/hack/Research/web3/audit_contests/$work/Notes/Notes.md
+	echo -e 'Crits\n--\n- #reportID \n (linkhere)\n- Desc\n\nHighs\n--\n- # ""\n (linkhere)\n- Desc\n\nMids\n--\n- # ""\n (linkhere)\n- Desc\n\nLows\n--\n- # ""\n (linkhere)\n- Desc\n' >> $HOME/hack/Research/web3/audit_contests/$work/Notes/Reports.md
+	echo -e '#Notes\n#Description: Random Thoughts\n## Prerequisites\n(stuff to keep in mind while testing,envinronment setup)\n\n## Misc\n\n## Attack_Ideas\n*' >> $HOME/hack/Research/web3/audit_contests/$work/Notes/Notes.md
 }
 
 ctf_tmp() {
-	ndir=$(ls /home/deadeye/hack/CTFs | fzf)
-	mkdir -p /home/deadeye/hack/CTFs/$ndir/$work;
-	cd /home/deadeye/hack/CTFs/$ndir/$work;
+	ndir=$(ls $HOME/hack/CTFs | fzf)
+	mkdir -p $HOME/hack/CTFs/$ndir/$work;
+	cd $HOME/hack/CTFs/$ndir/$work;
 	touch {Notes,Flags}.md
 	
 }
 
 new_ctf_tmp() {
-	mkdir -p /home/deadeye/hack/CTFs/$work;
-	cd /home/deadeye/hack/CTFs/$work;
+	mkdir -p $HOME/hack/CTFs/$work;
+	cd $HOME/hack/CTFs/$work;
 	touch {Notes,Flags}.md
 }
 
 target_web_tmp() {
-	mkdir -p /home/deadeye/hack/Research/web/Targets/$work/{Assets,Notes,Proxy_data};
-	cd /home/deadeye/hack/Research/Targets/$work/Notes;
+	mkdir -p $HOME/hack/Research/web/Targets/$work/{Assets,Notes,Proxy_data};
+	cd $HOME/hack/Research/Targets/$work/Notes;
 	touch {Notes,Stuff,Reports,Flows,Endpoints,RTFM}.md
 	content
 }
 
 contest_tmp() {
-	mkdir -p /home/deadeye/hack/Research/web3/audit_contests/$work/{Assets,Notes};
-	cd /home/deadeye/hack/Research/web3/audit_contests/$work/Notes;
+	mkdir -p $HOME/hack/Research/web3/audit_contests/$work/{Assets,Notes};
+	cd $HOME/hack/Research/web3/audit_contests/$work/Notes;
 	touch {Notes,Reports,Flows}.md
 	contentw3contest
 }
 target_web3_tmp() {
-	mkdir -p /home/deadeye/hack/Research/web3/target/$work/{Assets,Notes};
-	cd /home/deadeye/hack/Research/web3/target/$work/Notes;
+	mkdir -p $HOME/hack/Research/web3/target/$work/{Assets,Notes};
+	cd $HOME/hack/Research/web3/target/$work/Notes;
 	touch {Notes,Reports,Flows}.md
 	contentw3target
 }
