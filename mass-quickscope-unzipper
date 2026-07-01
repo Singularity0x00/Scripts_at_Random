@@ -1,0 +1,16 @@
+#! /bin/sh
+for i in $(ls ./*.zip | grep v2)
+do 
+    dir="$(echo "$(ls $i | cut -d "-" -f 3)"_qsv2)"
+    unzip "$i" -d $dir
+    mv "$i" $dir
+done &&
+
+for i in $(ls ./*.zip)
+do 
+    dir=$(ls $i | cut -d "-" -f 2)
+    unzip "$i" -d $dir
+    mv "$i" $dir
+done 
+
+
